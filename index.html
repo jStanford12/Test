@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Tale of Two Midlands: 2021 Census Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+                max-height: 500px;
+            }
+        }
+        .stat-card {
+            background-color: rgba(0, 63, 92, 0.5);
+            border: 1px solid rgba(0, 166, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-gray-200">
+ 
+    <div class="bg-red-500 text-white text-center p-4">
+	 Hopefully this should be red with white text
+</div>
+ 
+    <div class="container mx-auto p-4 md:p-8">
+ 
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#ef5675] to-[#ffa600]">A Tale of Two Midlands</h1>
+            <p class="text-lg md:text-xl text-gray-400 mt-2">A Visual Portrait of the Region from the 2021 Census</p>
+        </header>
+ 
+        <section id="glance" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-white">The Midlands at a Glance: An Urban-Rural Divide</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div class="stat-card rounded-xl shadow-2xl p-6 flex flex-col justify-center">
+                    <p class="text-lg text-gray-400">Median Age</p>
+                    <div class="flex justify-around items-baseline mt-2">
+                        <div>
+                            <p class="text-6xl font-black text-[#ff764a]">38</p>
+                            <p class="text-gray-300">West Mids County</p>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-500">vs</p>
+                        <div>
+                            <p class="text-6xl font-black text-[#7a5195]">48</p>
+                            <p class="text-gray-300">Shropshire & Herefordshire</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card rounded-xl shadow-2xl p-6 flex flex-col justify-center">
+                    <p class="text-lg text-gray-400">Ethnic Diversity (% Non-White)</p>
+                     <div class="flex justify-around items-baseline mt-2">
+                        <div>
+                            <p class="text-6xl font-black text-[#ef5675]">38.6%</p>
+                            <p class="text-gray-300">West Mids County</p>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-500">vs</p>
+                        <div>
+                            <p class="text-6xl font-black text-[#003f5c]">3.1%</p>
+                            <p class="text-gray-300">Herefordshire</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <section id="population" class="mb-16">
+            <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-2 text-white">Population Distribution</h2>
+                <p class="text-center text-gray-400 max-w-3xl mx-auto mb-8">The West Midlands County is the region's population anchor, home to nearly 3 million people. The surrounding shires are significantly more sparsely populated, highlighting the concentration of residents in the urban core.</p>
+                <div class="chart-container">
+                    <canvas id="populationChart"></canvas>
+                </div>
+            </div>
+        </section>
+ 
+        <section id="urban-core" class="mb-16">
+             <h2 class="text-3xl font-bold text-center mb-8 text-white">The Urban Engine: A Deep Dive into the West Midlands County</h2>
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold text-center mb-2 text-white">A "Super-Diverse" Metropolis</h3>
+                    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-6">The county is the second most ethnically diverse region in England, a characteristic that defines its social fabric. The Asian community forms the largest minority group, followed by the Black community.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="ethnicityChart"></canvas>
+                    </div>
+                </div>
+                 <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold text-center mb-2 text-white">A Youthful, Challenged Economy</h3>
+                    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-6">Reflecting its young population, retirement is low. However, the county faces higher unemployment and economic inactivity due to long-term sickness compared to the national average, indicating structural economic challenges.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="econIndicatorsChart"></canvas>
+                    </div>
+                </div>
+             </div>
+        </section>
+ 
+        <section id="rural-heartlands" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-white">The Rural Heartlands: An Aging Population</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8 lg:col-span-2">
+                    <h3 class="text-xl md:text-2xl font-bold text-center mb-2 text-white">The Silver Shires: A Generational Shift</h3>
+                    <p class="text-center text-gray-400 max-w-3xl mx-auto mb-8">The surrounding shires are aging significantly faster than the urban core and the national average. Over a quarter of Shropshire's population is now over 65, posing long-term challenges for healthcare and the local workforce.</p>
+                    <div class="chart-container">
+                        <canvas id="agingPopulationChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+                     <h3 class="text-xl md:text-2xl font-bold text-center mb-2 text-white">Shire Economies: A Profile</h3>
+                    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-6">The economies of the shires show distinct profiles shaped by their rural character. High rates of retirement and self-employment are common, with very low unemployment. Herefordshire stands out for its high self-employment, likely tied to agriculture.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="shireRadarChart"></canvas>
+                    </div>
+                </div>
+                 <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold text-center mb-2 text-white">Housing & Lifestyle Differences</h3>
+                    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-6">Lifestyle and living situations vary dramatically. Car dependency is high in the shires, while home ownership is the norm. In the urban West Midlands, lower car ownership and higher rates of renting reflect a different economic and social reality.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="housingTenureChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <section id="future" class="mb-8">
+             <h2 class="text-3xl font-bold text-center mb-8 text-white">The Future: Challenges & Opportunities</h2>
+             <p class="text-center text-gray-400 max-w-3xl mx-auto mb-12">The demographic trajectories of the two Midlands create distinct strategic challenges. The shires must manage an aging population and potential labor shortages, while the urban core must focus on closing the skills gap and addressing deprivation to unlock the potential of its young, diverse population.</p>
+             <div class="flex flex-col md:flex-row justify-center items-stretch gap-8">
+                <div class="w-full md:w-1/2 bg-slate-800 rounded-xl shadow-2xl p-8 border-t-4 border-[#7a5195]">
+                    <h3 class="text-2xl font-bold text-center mb-4">The Aging Shires</h3>
+                    <div class="space-y-4 text-center">
+                        <div class="stat-card p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">Challenge</p>
+                            <p class="text-gray-300">Rising demand for health & social care.</p>
+                        </div>
+                        <div class="text-2xl font-black text-gray-500">&darr;</div>
+                        <div class="stat-card p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">Challenge</p>
+                            <p class="text-gray-300">Shrinking local workforce due to retirement.</p>
+                        </div>
+                        <div class="text-2xl font-black text-gray-500">&darr;</div>
+                         <div class="bg-green-900/50 border border-green-500 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-green-300">Opportunity</p>
+                            <p class="text-gray-300">Attract workers from the urban core and invest in agri-tech and tourism.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 bg-slate-800 rounded-xl shadow-2xl p-8 border-t-4 border-[#ef5675]">
+                    <h3 class="text-2xl font-bold text-center mb-4">The Youthful Urban Core</h3>
+                     <div class="space-y-4 text-center">
+                        <div class="stat-card p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">Challenge</p>
+                            <p class="text-gray-300">Significant skills gap and high deprivation.</p>
+                        </div>
+                        <div class="text-2xl font-black text-gray-500">&darr;</div>
+                        <div class="stat-card p-4 rounded-lg">
+                            <p class="font-bold text-lg text-white">Challenge</p>
+                            <p class="text-gray-300">Intense pressure on housing and public services.</p>
+                        </div>
+                        <div class="text-2xl font-black text-gray-500">&darr;</div>
+                         <div class="bg-green-900/50 border border-green-500 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-green-300">Opportunity</p>
+                            <p class="text-gray-300">Leverage the young, diverse talent pool through investment in education and skills.</p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+ 
+        <footer class="text-center text-gray-500 mt-16 text-sm">
+            <p>Data sourced from the Office for National Statistics, 2021 Census for England and Wales.</p>
+            <p>Infographic created by Canvas Infographics.</p>
+        </footer>
+ 
+    </div>
+ 
+    <script>
+        const brilliantBlues = ['#003f5c', '#7a5195', '#ef5675', '#ff764a', '#ffa600', '#374c80', '#bc5090'];
+        const brilliantBluesTransparent = ['rgba(0, 63, 92, 0.7)', 'rgba(122, 81, 149, 0.7)', 'rgba(239, 86, 117, 0.7)', 'rgba(255, 118, 74, 0.7)', 'rgba(255, 166, 0, 0.7)', 'rgba(55, 76, 128, 0.7)', 'rgba(188, 80, 144, 0.7)'];
+ 
+        const processLabels = (labels) => {
+            return labels.map(label => {
+                if (label.length > 16) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + word).length > 16) {
+                            lines.push(currentLine.trim());
+                            currentLine = '';
+                        }
+                        currentLine += word + ' ';
+                    });
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            });
+        };
+ 
+        const tooltipTitleCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: '#cbd5e1'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: '#94a3b8' },
+                    grid: { color: 'rgba(148, 163, 184, 0.2)' },
+                    border: { color: 'rgba(148, 163, 184, 0.2)' }
+                },
+                x: {
+                    ticks: { color: '#94a3b8' },
+                    grid: { display: false },
+                     border: { color: 'rgba(148, 163, 184, 0.2)' }
+                }
+            },
+            maintainAspectRatio: false
+        };
+ 
+        new Chart(document.getElementById('populationChart'), {
+            type: 'bar',
+            data: {
+                labels: processLabels(['West Midlands County', 'Staffordshire', 'Gloucestershire', 'Worcestershire', 'Shropshire', 'Herefordshire']),
+                datasets: [{
+                    label: 'Total Population (2021)',
+                    data: [2919654, 876104, 645076, 603600, 323600, 187000],
+                    backgroundColor: brilliantBluesTransparent,
+                    borderColor: brilliantBlues,
+                    borderWidth: 2
+                }]
+            },
+            options: tooltipTitleCallback
+        });
+ 
+        new Chart(document.getElementById('ethnicityChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['White', 'Asian', 'Black', 'Mixed', 'Other'],
+                datasets: [{
+                    label: 'Ethnic Composition',
+                    data: [61.4, 22.9, 8.1, 4.6, 3.0],
+                    backgroundColor: brilliantBlues,
+                    borderColor: '#1e293b',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                 plugins: {
+                    tooltip: tooltipTitleCallback.plugins.tooltip,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#cbd5e1',
+                            padding: 20
+                        }
+                    }
+                },
+                maintainAspectRatio: false
+            }
+        });
+ 
+        new Chart(document.getElementById('econIndicatorsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Unemployed', ['Economically Inactive', '(Long-term sick)']],
+                datasets: [{
+                    label: 'West Midlands County',
+                    data: [4.1, 9.3],
+                    backgroundColor: 'rgba(239, 86, 117, 0.7)',
+                    borderColor: '#ef5675',
+                    borderWidth: 2
+                }, {
+                    label: 'England & Wales Average',
+                    data: [2.8, 7.3],
+                     backgroundColor: 'rgba(0, 63, 92, 0.7)',
+                    borderColor: '#003f5c',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                ...tooltipTitleCallback,
+                scales: {
+                    y: { ...tooltipTitleCallback.scales.y,
+                        ticks: {
+                            ...tooltipTitleCallback.scales.y.ticks,
+                            callback: function(value) {
+                                return value + '%'
+                            }
+                        }
+                    },
+                    x: tooltipTitleCallback.scales.x
+                }
+            }
+        });
+ 
+        new Chart(document.getElementById('agingPopulationChart'), {
+            type: 'bar',
+            data: {
+                labels: processLabels(['Worcestershire', 'Gloucestershire', 'Staffordshire', 'Shropshire', 'Herefordshire', 'West Mids County']),
+                datasets: [{
+                    label: '% Population Aged 65+',
+                    data: [23.0, 21.7, 22.0, 25.3, 24.1, 16.0],
+                    backgroundColor: brilliantBluesTransparent,
+                    borderColor: brilliantBlues,
+                    borderWidth: 2
+                },
+                {
+                    label: 'England & Wales Average',
+                    data: [18.6, 18.6, 18.6, 18.6, 18.6, 18.6],
+                    type: 'line',
+                    borderColor: '#ff764a',
+                    backgroundColor: '#ff764a',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    fill: false
+                }]
+            },
+            options: {
+                ...tooltipTitleCallback,
+                scales: {
+                     y: { ...tooltipTitleCallback.scales.y,
+                        ticks: {
+                            ...tooltipTitleCallback.scales.y.ticks,
+                            callback: function(value) {
+                                return value + '%'
+                            }
+                        }
+                    },
+                    x: tooltipTitleCallback.scales.x
+                }
+            }
+        });
+        
+        new Chart(document.getElementById('shireRadarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['% Retired', '% Self-Employed', '% Home Ownership', '% Unemployed (Lower is better)'],
+                datasets: [
+                    {
+                        label: 'Worcestershire',
+                        data: [26.3, 8.0, 61.4, 2.3],
+                        fill: true,
+                        backgroundColor: 'rgba(0, 63, 92, 0.4)',
+                        borderColor: 'rgb(0, 63, 92)',
+                        pointBackgroundColor: 'rgb(0, 63, 92)',
+                    }, {
+                        label: 'Gloucestershire',
+                        data: [24.1, 8.4, 63.9, 2.0],
+                        fill: true,
+                        backgroundColor: 'rgba(122, 81, 149, 0.4)',
+                        borderColor: 'rgb(122, 81, 149)',
+                        pointBackgroundColor: 'rgb(122, 81, 149)',
+                    },
+                     {
+                        label: 'Staffordshire',
+                        data: [24.8, 6.7, 74.5, 2.3],
+                        fill: true,
+                        backgroundColor: 'rgba(239, 86, 117, 0.4)',
+                        borderColor: 'rgb(239, 86, 117)',
+                        pointBackgroundColor: 'rgb(239, 86, 117)',
+                    },
+                     {
+                        label: 'Shropshire',
+                        data: [25.9, 8.2, 68.6, 2.3],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 118, 74, 0.4)',
+                        borderColor: 'rgb(255, 118, 74)',
+                        pointBackgroundColor: 'rgb(255, 118, 74)',
+                    },
+                    {
+                        label: 'Herefordshire',
+                        data: [28.4, 10.3, 66.4, 2.0],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 166, 0, 0.4)',
+                        borderColor: 'rgb(255, 166, 0)',
+                        pointBackgroundColor: 'rgb(255, 166, 0)',
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipTitleCallback.plugins.tooltip,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#cbd5e1'
+                        }
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(148, 163, 184, 0.2)' },
+                        grid: { color: 'rgba(148, 163, 184, 0.2)' },
+                        pointLabels: {
+                            color: '#cbd5e1',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        ticks: {
+                            color: '#1e293b',
+                            backdropColor: 'rgba(148, 163, 184, 0.8)',
+                            backdropPadding: 4,
+                            borderRadius: 4
+                        }
+                    }
+                }
+            }
+        });
+ 
+        new Chart(document.getElementById('housingTenureChart'), {
+            type: 'bar',
+            data: {
+                labels: processLabels(['West Mids County', 'Worcestershire', 'Gloucestershire', 'Staffordshire', 'Shropshire', 'Herefordshire']),
+                datasets: [
+                    {
+                        label: '% Owned',
+                        data: [57.2, 61.4, 63.9, 74.5, 68.6, 66.4],
+                        backgroundColor: 'rgba(0, 63, 92, 0.8)',
+                    },
+                    {
+                        label: '% Privately Rented',
+                        data: [21.3, 21.2, 21.3, 10.6, 17.5, 18.8],
+                        backgroundColor: 'rgba(188, 80, 144, 0.8)',
+                    },
+                     {
+                        label: '% No Car',
+                        data: [27.5, 14.8, 14.2, 18.4, 15.6, 14.4],
+                        backgroundColor: 'rgba(255, 166, 0, 0.8)',
+                    }
+                ]
+            },
+            options: {
+                ...tooltipTitleCallback,
+                scales: {
+                    y: {
+                        stacked: true,
+                        ...tooltipTitleCallback.scales.y,
+                        ticks: {
+                            ...tooltipTitleCallback.scales.y.ticks,
+                            callback: function(value) { return value + '%' }
+                        }
+                    },
+                    x: {
+                        stacked: true,
+                        ...tooltipTitleCallback.scales.x
+                    }
+                },
+                plugins: {
+                    ...tooltipTitleCallback.plugins,
+                    title: {
+                        display: true,
+                        text: 'Housing Tenure and Car Ownership (%)',
+                        color: '#cbd5e1',
+                        font: { size: 16 }
+                    }
+                }
+            }
+        });
+ 
+    </script>
+ 
+   <script>
+	  console.log("Tailwind and JS Please Work")
+</script>	
+ 
+</body>
+</html>
